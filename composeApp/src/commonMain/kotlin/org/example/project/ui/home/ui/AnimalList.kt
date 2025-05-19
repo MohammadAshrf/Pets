@@ -2,6 +2,7 @@ package org.example.project.ui.home.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,6 +36,7 @@ import org.example.project.theme.rounded16
 import org.jetbrains.compose.resources.painterResource
 import pets.composeapp.generated.resources.Res
 import pets.composeapp.generated.resources.dog2
+import pets.composeapp.generated.resources.filled_star
 import pets.composeapp.generated.resources.star
 
 @Composable
@@ -102,6 +108,9 @@ fun AnimalInfo() {
 
 @Composable
 fun AnimalImage() {
+    var iconValue by remember {
+        mutableStateOf(Res.drawable.star)
+    }
     Box {
         Image(
             painterResource(Res.drawable.dog2),
@@ -112,13 +121,20 @@ fun AnimalImage() {
         )
 
         Icon(
-            painterResource(Res.drawable.star),
+            painterResource(iconValue),
             modifier = Modifier
                 .padding(top = 8.dp, end = 7.dp)
                 .clip(CircleShape)
                 .background(color = Color.White.copy(alpha = 0.25f), CircleShape)
                 .padding(5.dp)
-                .align(Alignment.TopEnd),
+                .align(Alignment.TopEnd)
+                .clickable {
+                    iconValue = if (iconValue == Res.drawable.star) {
+                        Res.drawable.filled_star
+                    } else {
+                        Res.drawable.star
+                    }
+                },
             contentDescription = "Star",
             tint = Color.Unspecified
         )
