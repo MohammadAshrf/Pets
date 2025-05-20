@@ -20,25 +20,19 @@ data class Animal(
         val animalList = listOf(
             Animal(
                 image = Res.drawable.animal1,
-                inFav = false,
-                name = "Jerrica",
-                age = 2,
-                family = "Tucker",
-                category = Category(
-                    image = Res.drawable.dog,
-                    name = "Dogs"
-                )
+                inFav = true,
+                name = "Chanita",
+                age = 3,
+                family = "Ciji",
+                category = Category(image = Res.drawable.dog, name = "Dogs")
             ),
             Animal(
                 image = Res.drawable.animal2,
-                inFav = false,
-                name = "Jerrica",
-                age = 7,
-                family = "Tucker",
-                category = Category(
-                    image = Res.drawable.cat,
-                    name = "Cats"
-                )
+                inFav = true,
+                name = "Trenise",
+                age = 4,
+                family = "Krystle",
+                category = Category(image = Res.drawable.cat, name = "Cats")
             ),
             Animal(
                 image = Res.drawable.animal3,
@@ -46,32 +40,23 @@ data class Animal(
                 name = "Jerrica",
                 age = 8,
                 family = "Tucker",
-                category = Category(
-                    image = Res.drawable.cat,
-                    name = "Cats"
-                )
+                category = Category(image = Res.drawable.cat, name = "Cats")
             ),
             Animal(
                 image = Res.drawable.animal1,
-                inFav = false,
-                name = "Jerrica",
-                age = 2,
-                family = "Tucker",
-                category = Category(
-                    image = Res.drawable.dog,
-                    name = "Dogs"
-                )
+                inFav = true,
+                name = "Chanita",
+                age = 3,
+                family = "Ciji",
+                category = Category(image = Res.drawable.dog, name = "Dogs")
             ),
             Animal(
                 image = Res.drawable.animal2,
-                inFav = false,
-                name = "Jerrica",
-                age = 7,
-                family = "Tucker",
-                category = Category(
-                    image = Res.drawable.cat,
-                    name = "Cats"
-                )
+                inFav = true,
+                name = "Trenise",
+                age = 4,
+                family = "Krystle",
+                category = Category(image = Res.drawable.cat, name = "Cats")
             ),
             Animal(
                 image = Res.drawable.animal3,
@@ -79,32 +64,23 @@ data class Animal(
                 name = "Jerrica",
                 age = 8,
                 family = "Tucker",
-                category = Category(
-                    image = Res.drawable.cat,
-                    name = "Cats"
-                )
+                category = Category(image = Res.drawable.cat, name = "Cats")
             ),
             Animal(
                 image = Res.drawable.animal1,
-                inFav = false,
-                name = "Jerrica",
-                age = 2,
-                family = "Tucker",
-                category = Category(
-                    image = Res.drawable.dog,
-                    name = "Dogs"
-                )
+                inFav = true,
+                name = "Chanita",
+                age = 3,
+                family = "Ciji",
+                category = Category(image = Res.drawable.dog, name = "Dogs")
             ),
             Animal(
                 image = Res.drawable.animal2,
-                inFav = false,
-                name = "Jerrica",
-                age = 7,
-                family = "Tucker",
-                category = Category(
-                    image = Res.drawable.cat,
-                    name = "Cats"
-                )
+                inFav = true,
+                name = "Trenise",
+                age = 4,
+                family = "Krystle",
+                category = Category(image = Res.drawable.cat, name = "Cats")
             ),
             Animal(
                 image = Res.drawable.animal3,
@@ -112,11 +88,8 @@ data class Animal(
                 name = "Jerrica",
                 age = 8,
                 family = "Tucker",
-                category = Category(
-                    image = Res.drawable.cat,
-                    name = "Cats"
-                )
-            )
+                category = Category(image = Res.drawable.cat, name = "Cats")
+            ),
         )
     }
 }
