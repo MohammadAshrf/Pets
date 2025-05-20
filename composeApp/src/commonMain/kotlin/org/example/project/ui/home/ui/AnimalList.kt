@@ -6,12 +6,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,29 +33,32 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.example.project.data.model.Animal
 import org.example.project.theme.categoryTextColor
 import org.example.project.theme.rounded16
 import org.jetbrains.compose.resources.painterResource
 import pets.composeapp.generated.resources.Res
-import pets.composeapp.generated.resources.dog2
 import pets.composeapp.generated.resources.filled_star
 import pets.composeapp.generated.resources.star
 
 @Composable
-fun AnimalList() {
+fun AnimalList(
+    animalList: List<Animal>?
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 16.dp)
     ) {
-        items(20) {
-            AnimalCard()
+        items(animalList ?: listOf()) {
+            AnimalCard(it)
         }
     }
 }
 
 @Composable
-fun AnimalCard() {
+fun AnimalCard(animal: Animal) {
     Card(
         shape = rounded16, colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -62,14 +67,14 @@ fun AnimalCard() {
         )
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            AnimalImage()
-            AnimalInfo()
+            AnimalImage(animal)
+            AnimalInfo(animal)
         }
     }
 }
 
 @Composable
-fun AnimalInfo() {
+fun AnimalInfo(animal: Animal) {
     Column(
         Modifier.padding(horizontal = 10.dp).padding(bottom = 30.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -79,7 +84,7 @@ fun AnimalInfo() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                "Grey",
+                animal.name,
                 style = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -87,7 +92,7 @@ fun AnimalInfo() {
                 )
             )
             Text(
-                "3 years",
+                "${animal.age} years",
                 style = TextStyle(
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Medium,
@@ -96,7 +101,7 @@ fun AnimalInfo() {
             )
         }
         Text(
-            "Yorkshire Terrier",
+            animal.family,
             style = TextStyle(
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
@@ -107,13 +112,13 @@ fun AnimalInfo() {
 }
 
 @Composable
-fun AnimalImage() {
+fun AnimalImage(animal: Animal) {
     var iconValue by remember {
         mutableStateOf(Res.drawable.star)
     }
     Box {
         Image(
-            painterResource(Res.drawable.dog2),
+            painterResource(animal.image),
             modifier = Modifier.height(116.dp)
                 .fillMaxWidth(),
             contentScale = ContentScale.Crop,

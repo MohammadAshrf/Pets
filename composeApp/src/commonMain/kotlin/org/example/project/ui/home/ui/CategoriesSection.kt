@@ -16,10 +16,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,40 +23,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.example.project.data.model.Category
 import org.example.project.theme.buttonBG
 import org.example.project.theme.categoryTextColor
 import org.example.project.theme.rounded100
 import org.jetbrains.compose.resources.painterResource
-import pets.composeapp.generated.resources.Res
-import pets.composeapp.generated.resources.cat
 
 @Composable
-fun CategoriesSection() {
-    val categories = remember {
-        listOf("All", "Cats", "Dogs", "Birds", "Fish")
-    }
-
-    var selectedIndex by remember {
-        mutableStateOf(0)
-    }
+fun CategoriesSection(
+    selectedItem: String,
+    categoryList: List<Category>?,
+    onClick: (String) -> Unit
+) {
 
     LazyRow(
         Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
     ) {
-        itemsIndexed(categories) { index, category ->
+        itemsIndexed(categoryList ?: listOf()) { index, category ->
             CategoryItem(
                 category = category,
-                isSelected = index == selectedIndex
-            ) {
-                selectedIndex = index
-            }
+                isSelected = category.name == selectedItem,
+                onClick = {
+                    onClick(category.name)
+                }
+            )
         }
     }
 }
 
 @Composable
-fun CategoryItem(category: String, isSelected: Boolean, onClick: () -> Unit) {
+fun CategoryItem(category: Category, isSelected: Boolean, onClick: () -> Unit) {
     val backgroundColor =
         animateColorAsState(
             if (isSelected) buttonBG else Color.White
@@ -88,12 +81,12 @@ fun CategoryItem(category: String, isSelected: Boolean, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(Res.drawable.cat), contentDescription = "Cat",
+            painter = painterResource(category.image), contentDescription = "Cat",
             modifier = Modifier.clip(CircleShape)
                 .size(32.dp)
         )
         Text(
-            category,
+            category.name,
             style = TextStyle(fontSize = 16.sp, color = textColor.value)
         )
     }
